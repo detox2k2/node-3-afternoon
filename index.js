@@ -1,32 +1,23 @@
-require("dotenv").config();
-const express = require("express");
-const massive = require("massive");
-const {
-  create,
-  getOne,
-  update,
-  deleted,
-  getAll
-} = require("./products_controller");
+require('dotenv').config();
+const express = require('express');
+const massive = require('massive');
+const products_controller = require("./products_controller");
+
+
 const app = express();
-
-const { SERVER_PORT, CONNECTION_STRING } = process.env;
-
-massive(CONNECTION_STRING)
-  .then(dbInstance => {
-    console.log("database connected");
-    app.set("db", dbInstance);
-  })
-  .catch(err => console.log(err));
+massive(process.env.CONNECTION_STRING).then(dbInstance => {
+    app.set('db', dbInstance)
+})
+.catch(error => console.log(error))
 
 app.use(express.json());
-const url = "/api/products";
-app.post(url, create);
-app.get(url, getAll);
-app.get(url + "/:id", getOne);
-app.put("/api/products/:id", update);
-app.delete("/api/products/:id", deleted);
 
-const server = app.listen(SERVER_PORT, () =>
-  console.log(`listening on ${server.address().port}`)
-);
+app.post('/api/products', products_controller.create);
+app.get('/api/products', products_controller.getAll);
+app.get('/api/products/:id', products_controller.getOne);
+app.put('/api/products/:id', products_controller.update);
+app.delete('/api/products/:id', products_controller.delete);
+
+app.listen(process.env.SERVER_PORT,() => {
+    console.log(' listening on port 3000');
+});

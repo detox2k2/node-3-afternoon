@@ -1,2 +1,2 @@
-DELETE FROM product WHERE product_id = $1;
-    
+DELETE FROM product 
+WHERE product_id = $1;    

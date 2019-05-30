@@ -19,7 +19,7 @@
   "homepage": "https://github.com/detox2k2/node-3-afternoon#readme",
   "dependencies": {
     "dotenv": "^7.0.0",
-    "express": "^4.16.4",
-    "massive": "^5.7.7"
+    "express": "^4.17.1",
+    "massive": "^5.10.0"
   }
 }
